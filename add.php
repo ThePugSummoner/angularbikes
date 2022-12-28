@@ -5,13 +5,13 @@ require_once 'inc/headers.php';
 
 
 $input = json_decode(file_get_contents('php://input'));
-$fname = filter_var($input->fname, FILTER_UNSAFE_RAW);
-$lname = filter_var($input->lname, FILTER_UNSAFE_RAW);
-$email = filter_var($input->email, FILTER_UNSAFE_RAW);
-$phone = filter_var($input->phone, FILTER_UNSAFE_RAW);
+$fname = filter_var($input->fname, FILTER_SANITIZE_SPECIAL_CHARS);
+$lname = filter_var($input->lname, FILTER_SANITIZE_SPECIAL_CHARS);
+$email = filter_var($input->email, FILTER_SANITIZE_EMAIL);
+$phone = filter_var($input->phone, FILTER_SANITIZE_NUMBER_INT);
 $password = filter_var($input->password, FILTER_UNSAFE_RAW);
 $hash_pw = password_hash($password, PASSWORD_DEFAULT);
-$subscribe = filter_var($input->subscribe, FILTER_UNSAFE_RAW);
+$subscribe = filter_var($input->subscribe, FILTER_SANITIZE_SPECIAL_CHARS);
 
 if (!empty($fname) && !empty($lname) && !empty($email) && !empty($phone)) {
 
