@@ -14,10 +14,18 @@ try {
     $sql = "SELECT * FROM asiakas WHERE sposti = '$email'";
     $query = $dbcon->query($sql);
     $user = $query->fetchAll(PDO::FETCH_ASSOC);
-    
+    //$query = $dbcon->prepare('SELECT * FROM asiakas WHERE sposti = (:email)');
+    //$query->bindParam(':email', $email, PDO::PARAM_STR);
+    //$query->execute();
     
     header('HTTP/1.1 200 OK');
 
+    //$json = json_encode($user);
+
+   // print $json;
+
+    //print json_encode($user);
+    
     if (!empty($user)) {
         $hash = $user[0]["salasana"];
         $email = $user[0]["sposti"];
@@ -28,15 +36,24 @@ try {
             } else {
                 echo "Data Matched";
             }
-           
+            //echo "Data Matched";
+            //echo $hash;
+            //$json = json_encode($user[0]);
+            //print($json);
         } 
-        
+        /*if (password_verify($pwd, $hash) == true && $email == "admin@admin.com") {
+            echo "Admin logged in!";
+        }*/
         else {
             echo "Käyttäjätunnus/salasana on virhellinen";
-            
+            //echo "</br>";
+            //echo $hash;
+            //echo "</br>";
+            //echo $pwd;
         }
     } else {
         echo "Käyttäjätunnus/salasana on virhellinen";
+        //echo $hash;
     }
     
    } catch (PDOException $pdoex) {

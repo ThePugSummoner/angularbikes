@@ -13,6 +13,10 @@ try {
     $query = $dbcon->query($sql);
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
     
+   //$query = $db->prepare('SELECT * FROM tilaus WHERE astunnus = (SELECT astunnus FROM asiakas WHERE sposti = (:email)');
+    //$query->bindValue(':email', $email, PDO::PARAM_STR);
+    //$query->execute();
+    
     header('HTTP/1.1 200 OK');
     print json_encode($results);
 } catch (PDOException $pdoex) {

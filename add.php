@@ -2,7 +2,7 @@
 
 require_once 'inc/functions.php';
 require_once 'inc/headers.php';
-
+//require('dbconnection.php');
 
 $input = json_decode(file_get_contents('php://input'));
 $fname = filter_var($input->fname, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -16,6 +16,8 @@ $subscribe = filter_var($input->subscribe, FILTER_SANITIZE_SPECIAL_CHARS);
 if (!empty($fname) && !empty($lname) && !empty($email) && !empty($phone)) {
 
     try {
+    /*$db = new PDO('mysql:host=localhost;dbname=todo;charset=utf8', 'root', '');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);*/
 
     $dbcon = openDb();
 

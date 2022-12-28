@@ -9,11 +9,11 @@ $category_id=$parameters[1];
 
 try{
     $db=openDb();
-    $sql="SELECT * FROM tuote WHERE alakategoria='$subCategory'";
+    $sql="SELECT * FROM tuote inner join alatuoteryhma on tuote.alakategorianro=alatuoteryhma.alakategorianro WHERE alakategoria='$subCategory'";
     $query=$db->query($sql);
     $subCategoryProducts=$query->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql="select DISTINCT alakategoria from tuote inner join tuoteryhma on tuote.trnro=tuoteryhma.trnro where trnimi='$category_id'";
+    $sql="select * from alatuoteryhma where alakategoria='$subCategory'";
     $query=$db->query($sql);
     $subCategories=$query->fetchAll(PDO::FETCH_ASSOC);
 

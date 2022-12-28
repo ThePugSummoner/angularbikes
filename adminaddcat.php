@@ -5,7 +5,7 @@ require_once 'inc/headers.php';
 
 $input = json_decode(file_get_contents('php://input'));
 
-$cat_name = filter_var($input->catname, FILTER_UNSAFE_RAW);
+$cat_name = filter_var($input->catname, FILTER_SANITIZE_SPECIAL_CHARS);
 
 if(!empty($cat_name)) {
     try {
